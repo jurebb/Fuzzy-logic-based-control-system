@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operations", "Operations\Op
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relations", "Relations\Relations.csproj", "{ADEE1B50-0AD0-446D-9C70-9796E38D92ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boatich", "Boatich\Boatich.csproj", "{3B8D9A3D-9938-4CF1-A061-3181E5622CAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{ADEE1B50-0AD0-446D-9C70-9796E38D92ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADEE1B50-0AD0-446D-9C70-9796E38D92ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADEE1B50-0AD0-446D-9C70-9796E38D92ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8D9A3D-9938-4CF1-A061-3181E5622CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8D9A3D-9938-4CF1-A061-3181E5622CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8D9A3D-9938-4CF1-A061-3181E5622CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8D9A3D-9938-4CF1-A061-3181E5622CAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -72,5 +72,26 @@ namespace FuzzySet
             });
             return Obj1;
         }
+
+
+
+        public static IIntUnaryFunction UniversalFunction(double a)
+        {
+            ConcreteIntUnaryFunction Obj1 = new ConcreteIntUnaryFunction((x) =>
+            {
+                return a;
+            });
+            return Obj1;
+        }
+
+        public static IIntUnaryFunction EmptyFunction()
+        {
+            ConcreteIntUnaryFunction Obj1 = new ConcreteIntUnaryFunction((x) =>
+            {
+                return 0;
+            });
+            return Obj1;
+        }
+
     }
 }

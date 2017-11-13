@@ -12,8 +12,24 @@ namespace Debug
 {
     class Debug1
     {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hi");
 
-        static void Main11(string[] args)
+            //Primjer11();
+            //Primjer12();
+            //Primjer13();
+            //Primjer21();
+            //Primjer22();
+            //Primjer23();
+
+            Test33();
+
+            Console.ReadKey();
+        }
+
+
+        static void Primjer11()
         {
             Console.WriteLine("Hi");
             IDomain d1 = Domain.IntRange(0, 5);
@@ -33,10 +49,9 @@ namespace Debug
             Console.WriteLine(d3.ElementForIndex(14));
             Console.WriteLine(d3.IndexOfElement(DomainElement.Of(4, 1)));
 
-            Console.ReadKey();
         }
 
-        static void Main12(string[] args)
+        static void Primjer12()
         {
             IDomain d = Domain.IntRange(0, 11); // {0,1,...,10}
             //Debug1.Print(d, "Elementi domene d1:");
@@ -61,10 +76,9 @@ namespace Debug
             Debug1.Print(set2, "Set2:");
 
 
-            Console.ReadKey();
         }
 
-        static void Main13(string[] args)
+        static void Primjer13()
         {
             IDomain d = Domain.IntRange(0, 11);
             IFuzzySet set1 = new MutableFuzzySet(d)
@@ -79,6 +93,8 @@ namespace Debug
                 set1, Operations.Operations.ZadehNot());
             Debug1.Print(notSet1, "notSet1:");
 
+
+
             IFuzzySet union = Operations.Operations.BinaryOperation(
                 set1, notSet1, Operations.Operations.ZadehOr());
             Debug1.Print(union, "Set1 union notSet1:");
@@ -87,14 +103,16 @@ namespace Debug
                 set1, notSet1, Operations.Operations.HamacherTNorm(1.0));
             Debug1.Print(hinters, "Set1 intersection with notSet1 using parameterised Hamacher T norm with parameter 1.0:");
 
-            Console.ReadKey();
+            IFuzzySet presjek = Operations.Operations.BinaryOperation(set1, notSet1, Operations.Operations.ZadehAnd());
+            Debug1.Print(presjek, "Set1 presjek notSet1:");
+
+
         }
 
 
 
 
-        //###############
-        public static void Main21(String[] args)
+        public static void Primjer21()
         {
             IDomain u = Domain.IntRange(1, 6); // {1,2,3,4,5}
             IDomain u2 = Domain.Combine(u, u);
@@ -158,9 +176,9 @@ namespace Debug
             bool test7 = Relations.Relations.IsMaxMinTransitive(r4);
             Console.WriteLine("r4 je max-min tranzitivna? " + test7);
 
-            Console.ReadKey();
-        }
-        public static void Main22(String[] args)
+        }
+
+        public static void Primjer22()
         {
             IDomain u1 = Domain.IntRange(1, 5); // {1,2,3,4}
             IDomain u2 = Domain.IntRange(1, 4); // {1,2,3}
@@ -184,9 +202,9 @@ namespace Debug
                 Console.WriteLine("mu(" + e + ")=" + r1r2.GetValueAt(e));
             }
 
-            Console.ReadKey();
-        }
-        public static void Main(String[] args)
+        }
+
+        public static void Primjer23()
         {
             IDomain u = Domain.IntRange(1, 5); // {1,2,3,4}
             IFuzzySet r = new MutableFuzzySet(Domain.Combine(u, u))
@@ -217,10 +235,84 @@ namespace Debug
                 Console.WriteLine();
             }
 
-            Console.ReadKey();
-        }
+        }
 
 
+        public static void Test31()
+        {
+            IDomain u = Domain.IntRange(-5, 6); // {-5,-4,...,4,5}
+            IDomain u2 = Domain.Combine(u, u);
+
+            IFuzzySet set = new CalculatedFuzzySet(
+            u2,
+            StandardFuzzySets.LambdaFunction(
+                u2.IndexOfElement(DomainElement.Of(-4, 2)),
+                u2.IndexOfElement(DomainElement.Of(0, 0)),
+                u2.IndexOfElement(DomainElement.Of(4, 2))
+            )
+            );
+
+            Debug1.Print(set, "Set cf:");
+        }
+
+        public static void Test32()
+        {
+            IDomain u = Domain.IntRange(-5, 6); // {-5,-4,...,4,5}
+            IDomain u2 = Domain.Combine(u, u);
+
+            IFuzzySet set = new CalculatedFuzzySet(
+            u2,
+            StandardFuzzySets.LambdaFunction(
+                u2.IndexOfElement(DomainElement.Of(-4, 2)),
+                u2.IndexOfElement(DomainElement.Of(0, 0)),
+                u2.IndexOfElement(DomainElement.Of(4, 2))
+            )
+            );
+
+            Debug1.Print(set, "Set cf:");
+
+            IFuzzySet notSet1 = Operations.Operations.UnaryOperation(
+                set, Operations.Operations.ZadehNot());
+            Debug1.Print(notSet1, "notSet1:");
+
+
+
+            IFuzzySet union = Operations.Operations.BinaryOperation(
+                set, notSet1, Operations.Operations.ZadehOr());
+            Debug1.Print(union, "Set1 union notSet1:");
+        }
+
+        public static void Test33()
+        {
+
+            double[] antecMembershipFunctions = new double[] {
+                0.8, 0.8, 0.7, 1, 0.7, 0.9
+            };
+
+            double minMembershipFunc = antecMembershipFunctions.Min();
+
+            IDomain u = Domain.IntRange(-5, 6);
+
+            IFuzzySet _conseq = new CalculatedFuzzySet(
+            u,
+            StandardFuzzySets.LambdaFunction(
+                u.IndexOfElement(DomainElement.Of(-5)),
+                u.IndexOfElement(DomainElement.Of(-3)),
+                u.IndexOfElement(DomainElement.Of(0))
+            )
+            );
+
+            Debug1.Print(_conseq, "Konsekv1:");
+
+
+            IFuzzySet antecedents = new CalculatedFuzzySet(                                     //mjere pripadnosti su na minimumu mj.pripadnosti antecedenata
+                _conseq.GetDomain(),
+                StandardFuzzySets.UniversalFunction(minMembershipFunc)
+            );
+
+            IFuzzySet conclusion = Operations.Operations.BinaryOperation(antecedents, _conseq, Operations.Operations.ZadehAnd());
+            Debug1.Print(conclusion, "Zakljucak1:");
+        }
 
 
         public static void Print(IDomain domain, string headingText)    //metoda za ispis elemenata domene

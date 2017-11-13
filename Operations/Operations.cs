@@ -28,11 +28,15 @@ namespace Operations
         public static IFuzzySet BinaryOperation(IFuzzySet fuzzySetA, IFuzzySet fuzzySetB, IBinaryFunction binary)
         {
             MutableFuzzySet A = new MutableFuzzySet(fuzzySetA.GetDomain());
-            if(fuzzySetA.GetDomain() != fuzzySetB.GetDomain())
-            {
-                Console.WriteLine("Can't do binary operation on sets with different domains");
-                return A;
-            }
+            //if (fuzzySetA.GetDomain() != fuzzySetB.GetDomain())
+            //{
+            //    if (fuzzySetA.GetDomain().GetComponent(fuzzySetA.GetDomain().GetNumberOfComponents() - 1) != fuzzySetB.GetDomain().GetComponent(fuzzySetB.GetDomain().GetNumberOfComponents() - 1))
+            //    {
+            //        Console.WriteLine("Can't do binary operation on sets with different domains");
+            //        return A;
+            //    }
+
+            //}
 
             foreach (DomainElement e in fuzzySetA.GetDomain())
             {
@@ -55,6 +59,15 @@ namespace Operations
             ConcreteBinaryFunction Obj1 = new ConcreteBinaryFunction((x, y) =>
             {
                 return Math.Min(x, y);
+            });
+            return Obj1;
+        }
+
+        public static IBinaryFunction AlgProduct()
+        {
+            ConcreteBinaryFunction Obj1 = new ConcreteBinaryFunction((x, y) =>
+            {
+                return x * y;
             });
             return Obj1;
         }
